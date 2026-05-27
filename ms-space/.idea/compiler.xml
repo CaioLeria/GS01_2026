@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="t-space" target="17" />
+      <module name="t-space.main" target="17" />
+      <module name="t-space.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="t-space" options="-parameters" />
+      <module name="t-space.main" options="-parameters" />
+      <module name="t-space.test" options="-parameters" />
+    </option>
+  </component>
+</project>

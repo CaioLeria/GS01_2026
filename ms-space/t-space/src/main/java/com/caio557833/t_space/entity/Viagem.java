@@ -4,7 +4,6 @@ import com.caio557833.t_space.dto.ViagemDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -12,7 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@EqualsAndHashCode
+@Table(name = "tb_viagem")
+@EqualsAndHashCode(of = "id")
 public class Viagem {
 
     @Id
@@ -21,23 +21,20 @@ public class Viagem {
 
     private String destino;
 
-    private LocalDate dataPartida;
+    private String empresa;
 
-    private Integer duracaoDias;
+    private String descricao;
 
-    private Double preco;
-
-    private Status status;
+    private Integer capacidadeMaxima;
 
     @OneToMany(mappedBy = "viagem")
-    private List<Passageiro> passageiros;
+    private List<ViagemPassageiro> viagensPassageiros;
 
-    public Viagem(ViagemDTO dto) {
+    public Viagem(ViagemDTO dto){
         this.id = dto.getId();
         this.destino = dto.getDestino();
-        this.dataPartida = dto.getDataPartida();
-        this.duracaoDias = dto.getDuracaoDias();
-        this.preco = dto.getPreco();
-        this.status = dto.getStatus();
+        this.empresa = dto.getEmpresa();
+        this.descricao = dto.getDescricao();
+        this.capacidadeMaxima = dto.getCapacidadeMaxima();
     }
 }

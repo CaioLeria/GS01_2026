@@ -19,24 +19,30 @@ public class ViagemService {
 
     @Transactional(readOnly = true)
     public List<ViagemDTO> findAll() {
-        return repository.findAll().stream().map(ViagemDTO::new).toList();
+
+        return repository.findAll()
+                .stream()
+                .map(ViagemDTO::new)
+                .toList();
     }
+
 
     @Transactional(readOnly = true)
     public ViagemDTO findById(Long id) {
-        Viagem viagem = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado com ID: "+id));
+
+        Viagem viagem = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Viagem não encontrada com ID: " + id));
+
         return new ViagemDTO(viagem);
     }
 
+
     @Transactional
     public ViagemDTO create(ViagemDTO dto) {
-        Viagem viagem = new Viagem();
-        viagem.setPreco(dto.getPreco());
-        viagem.setDestino(dto.getDestino());
-        viagem.setPassageiros(dto.getPassageiro());
-        viagem.setDataPartida(dto.getDataPartida());
-        viagem.setDuracaoDias(dto.getDuracaoDias());
-        viagem.setStatus(dto.getStatus());
+
+        Viagem viagem = new Viagem(dto);
 
         Viagem saved = repository.save(viagem);
 
@@ -46,23 +52,29 @@ public class ViagemService {
 
     @Transactional
     public ViagemDTO update(ViagemDTO dto, Long id) {
-        Viagem viagem = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado com ID: "+id));
-        viagem.setPreco(dto.getPreco());
+
+        Viagem viagem = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Viagem não encontrada com ID: " + id));
+
         viagem.setDestino(dto.getDestino());
-        viagem.setPassageiros(dto.getPassageiro());
-        viagem.setDataPartida(dto.getDataPartida());
-        viagem.setDuracaoDias(dto.getDuracaoDias());
-        viagem.setStatus(dto.getStatus());
+        viagem.setEmpresa(dto.getEmpresa());
+        viagem.setDescricao(dto.getDescricao());
+        viagem.setCapacidadeMaxima(dto.getCapacidadeMaxima());
 
         Viagem saved = repository.save(viagem);
 
         return new ViagemDTO(saved);
     }
 
+
     @Transactional
     public void delete(Long id) {
-        if(!repository.existsById(id)){
-            throw new ResourceNotFoundException("Recurso não encontrado com ID: "+id);
+
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException(
+                    "Viagem não encontrada com ID: " + id);
         }
 
         repository.deleteById(id);

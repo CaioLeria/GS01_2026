@@ -5,14 +5,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@EqualsAndHashCode
+@Table(name = "tb_passageiro")
+@EqualsAndHashCode(of = "id")
 public class Passageiro {
+
+    public Passageiro(PassageiroDTO dto){
+        this.id = dto.getId();
+        this.nome = dto.getNome();
+        this.idade = dto.getIdade();
+        this.passaporte = dto.getPassaporte();
+        this.dataCadastro = dto.getDataCadastro();
+        this.nacionalidade = dto.getNacionalidade();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +39,6 @@ public class Passageiro {
 
     private String nacionalidade;
 
-    @ManyToOne
-    @JoinColumn(name = "viagem_id")
-    private Viagem viagem;
-
-    public Passageiro(PassageiroDTO dto) {
-        this.id = dto.getId();
-        this.nome = dto.getNome();
-        this.idade = dto.getIdade();
-        this.passaporte = dto.getPassaporte();
-        this.dataCadastro = dto.getDataCadastro();
-        this.nacionalidade = dto.getNacionalidade();
-    }
+    @OneToMany(mappedBy = "passageiro")
+    private List<ViagemPassageiro> viagensPassageiros;
 }

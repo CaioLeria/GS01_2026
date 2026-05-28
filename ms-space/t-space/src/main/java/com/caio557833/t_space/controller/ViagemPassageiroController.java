@@ -1,7 +1,7 @@
 package com.caio557833.t_space.controller;
 
-import com.caio557833.t_space.dto.ViagemDTO;
-import com.caio557833.t_space.service.ViagemService;
+import com.caio557833.t_space.dto.ViagemPassageiroDTO;
+import com.caio557833.t_space.service.ViagemPassageiroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +12,15 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/viagem")
-public class ViagemController {
+@RequestMapping("/viagem-passageiro")
+public class ViagemPassageiroController {
 
     @Autowired
-    private ViagemService service;
+    private ViagemPassageiroService service;
 
 
     @GetMapping
-    public ResponseEntity<List<ViagemDTO>> findAll() {
+    public ResponseEntity<List<ViagemPassageiroDTO>> findAll() {
 
         return ResponseEntity.ok(
                 service.findAll());
@@ -28,7 +28,7 @@ public class ViagemController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ViagemDTO> findById(
+    public ResponseEntity<ViagemPassageiroDTO> findById(
             @PathVariable Long id) {
 
         return ResponseEntity.ok(
@@ -37,10 +37,10 @@ public class ViagemController {
 
 
     @PostMapping
-    public ResponseEntity<ViagemDTO> create(
-            @Valid @RequestBody ViagemDTO dto) {
+    public ResponseEntity<ViagemPassageiroDTO> create(
+            @Valid @RequestBody ViagemPassageiroDTO dto) {
 
-        ViagemDTO created =
+        ViagemPassageiroDTO created =
                 service.create(dto);
 
         URI uri = ServletUriComponentsBuilder
@@ -57,8 +57,8 @@ public class ViagemController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<ViagemDTO> update(
-            @Valid @RequestBody ViagemDTO dto,
+    public ResponseEntity<ViagemPassageiroDTO> update(
+            @Valid @RequestBody ViagemPassageiroDTO dto,
             @PathVariable Long id) {
 
         return ResponseEntity.ok(

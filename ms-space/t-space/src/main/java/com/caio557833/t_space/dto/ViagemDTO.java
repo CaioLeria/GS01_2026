@@ -1,14 +1,8 @@
 package com.caio557833.t_space.dto;
 
-import com.caio557833.t_space.entity.Passageiro;
-import com.caio557833.t_space.entity.Status;
 import com.caio557833.t_space.entity.Viagem;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.util.List;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -17,25 +11,33 @@ public class ViagemDTO {
 
     private Long id;
 
+    @NotBlank(message = "Destino é obrigatório")
+    @Size(min = 2, max = 100,
+            message = "Destino deve ter entre 2 e 100 caracteres")
     private String destino;
 
-    private LocalDate dataPartida;
+    @NotBlank(message = "Empresa é obrigatória")
+    @Size(min = 2, max = 100,
+            message = "Empresa deve ter entre 2 e 100 caracteres")
+    private String empresa;
 
-    private Integer duracaoDias;
+    @NotBlank(message = "Descrição é obrigatória")
+    @Size(min = 10, max = 500,
+            message = "Descrição deve ter entre 10 e 500 caracteres")
+    private String descricao;
 
-    private Double preco;
+    @NotNull(message = "Capacidade máxima é obrigatória")
+    @Min(value = 1,
+            message = "Capacidade deve ser no mínimo 1")
+    @Max(value = 1000,
+            message = "Capacidade excede o limite permitido")
+    private Integer capacidadeMaxima;
 
-    private Status status;
-
-    private List<Passageiro> passageiro;
-
-    public ViagemDTO(Viagem viagem) {
+    public ViagemDTO(Viagem viagem){
+        this.id = viagem.getId();
         this.destino = viagem.getDestino();
-        this.dataPartida = viagem.getDataPartida();
-        this.duracaoDias = viagem.getDuracaoDias();
-        this.preco = viagem.getPreco();
-        this.status = viagem.getStatus();
-        this.passageiro = viagem.getPassageiros();
+        this.empresa = viagem.getEmpresa();
+        this.descricao = viagem.getDescricao();
+        this.capacidadeMaxima = viagem.getCapacidadeMaxima();
     }
-
 }

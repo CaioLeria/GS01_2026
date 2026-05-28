@@ -20,20 +20,14 @@ public class PassageiroDTO {
             message = "Nome deve possuir entre 3 e 120 caracteres")
     private String nome;
 
-    @NotNull(message = "Idade é obrigatória")
-    @Min(value = 18,
-            message = "Passageiro deve ter no mínimo 18 anos")
-    @Max(value = 120,
-            message = "Idade inválida")
-    private Integer idade;
+    @NotNull(message = "Data de nescimento é obrigatório")
+    private LocalDate dataNascimento;
 
     @NotBlank(message = "Passaporte é obrigatório")
     @Size(min = 5, max = 20,
             message = "Passaporte deve possuir entre 5 e 20 caracteres")
-    @Pattern(
-            regexp = "^[A-Za-z0-9]+$",
-            message = "Passaporte deve conter apenas letras e números"
-    )
+
+    @NotNull(message = "Passaporte é obrigatória")
     private String passaporte;
 
     @NotNull(message = "Data de cadastro é obrigatória")
@@ -49,7 +43,7 @@ public class PassageiroDTO {
     public PassageiroDTO(Passageiro passageiro){
         this.id = passageiro.getId();
         this.nome = passageiro.getNome();
-        this.idade = passageiro.getIdade();
+        this.dataNascimento = passageiro.getDataNascimento();
         this.passaporte = passageiro.getPassaporte();
         this.dataCadastro = passageiro.getDataCadastro();
         this.nacionalidade = passageiro.getNacionalidade();

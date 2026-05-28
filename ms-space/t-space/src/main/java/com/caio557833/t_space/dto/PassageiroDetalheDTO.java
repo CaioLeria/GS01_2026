@@ -15,7 +15,7 @@ public class PassageiroDetalheDTO {
 
     private Long id;
     private String nome;
-    private Integer idade;
+    private LocalDate dataNascimento;
     private String passaporte;
     private LocalDate dataCadastro;
     private String nacionalidade;
@@ -26,7 +26,7 @@ public class PassageiroDetalheDTO {
 
         this.id = passageiro.getId();
         this.nome = passageiro.getNome();
-        this.idade = passageiro.getIdade();
+        this.dataNascimento = passageiro.getDataNascimento();
         this.passaporte = passageiro.getPassaporte();
         this.dataCadastro = passageiro.getDataCadastro();
         this.nacionalidade = passageiro.getNacionalidade();

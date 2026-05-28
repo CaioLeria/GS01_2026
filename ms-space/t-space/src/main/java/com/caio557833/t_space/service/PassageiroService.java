@@ -64,7 +64,7 @@ public class PassageiroService {
                                         "Passageiro não encontrado com ID: " + id));
 
         passageiro.setNome(dto.getNome());
-        passageiro.setIdade(dto.getIdade());
+        passageiro.setDataNascimento(dto.getDataNascimento());
         passageiro.setPassaporte(dto.getPassaporte());
         passageiro.setDataCadastro(dto.getDataCadastro());
         passageiro.setNacionalidade(dto.getNacionalidade());

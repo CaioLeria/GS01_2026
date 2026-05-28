@@ -19,7 +19,7 @@ public class Passageiro {
     public Passageiro(PassageiroDTO dto){
         this.id = dto.getId();
         this.nome = dto.getNome();
-        this.idade = dto.getIdade();
+        this.dataNascimento = dto.getDataNascimento();
         this.passaporte = dto.getPassaporte();
         this.dataCadastro = dto.getDataCadastro();
         this.nacionalidade = dto.getNacionalidade();
@@ -31,7 +31,7 @@ public class Passageiro {
 
     private String nome;
 
-    private Integer idade;
+    private LocalDate dataNascimento;
 
     private String passaporte;
 

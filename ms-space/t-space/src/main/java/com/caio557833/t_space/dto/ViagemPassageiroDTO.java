@@ -22,10 +22,6 @@ public class ViagemPassageiroDTO {
 
     @NotNull(message = "Preço é obrigatório")
     @Positive(message = "Preço deve ser maior que zero")
-    @DecimalMax(
-            value = "999999999.99",
-            message = "Preço excede o limite permitido"
-    )
     private Double preco;
 
     @NotNull(message = "Duração é obrigatória")

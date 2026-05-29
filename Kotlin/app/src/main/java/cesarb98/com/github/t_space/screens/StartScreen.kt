@@ -29,11 +29,10 @@ fun StartScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(Color(0xFFED145B))
             .padding(24.dp),
-        verticalArrangement = Arrangement.SpaceBetween, // Mantém Header no topo, Body no meio e Botões no fim
+        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        // --- 1. HEADER (Nome do App ou Logo) ---
         Text(
             text = "T-Space",
             fontSize = 28.sp,
@@ -42,7 +41,6 @@ fun StartScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(top = 24.dp)
         )
 
-        // --- 2. BODY (Introdução e Proposta de Valor) ---
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,7 +53,6 @@ fun StartScreen(modifier: Modifier = Modifier) {
                 color = Color.White
             )
 
-            // Caixa explicativa sobre o que é o App
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -72,13 +69,10 @@ fun StartScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        // --- 3. DOIS BOTÕES DE AÇÃO ---
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            // Botão Principal: Começar / Criar Conta
             Button(
                 onClick = { /* Navegar para o cadastro */ },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
@@ -93,7 +87,6 @@ fun StartScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            // Botão Secundário: Já tenho conta (Login)
             OutlinedButton(
                 onClick = { /* Navegar para a tela de login antiga */ },
                 border = BorderStroke(1.5.dp, Color.White),

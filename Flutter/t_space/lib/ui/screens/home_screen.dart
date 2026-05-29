@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:t_space/model/company.dart';
+import 'package:t_space/model/travel.dart';
 import 'package:t_space/repository/company_repository.dart';
+import 'package:t_space/repository/travel_reposritory.dart';
 import 'package:t_space/ui/components/company_card.dart';
 import 'package:t_space/ui/components/header.dart';
+import 'package:t_space/ui/components/travel_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,11 +16,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late List<Company> companiesState;
+  late List<Travel> travelListState;
 
   @override
   void initState() {
     super.initState();
     companiesState = getAllCompanies();
+    travelListState = getAllTravels();
   }
 
   @override
@@ -31,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: double.infinity,
           child: Column(
             children: [
+              
               SizedBox(
                 height: 96,
                 width: double.infinity,
@@ -44,6 +50,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     return CompanyCard(company: company);
                   },
                 ),
+              ),
+              Expanded(
+                child: travelListState.isEmpty
+                    ? const Center(child: Text('Nenhuma viagem encontrada'))
+                    : ListView.builder(
+                        itemCount: travelListState.length,
+                        itemBuilder: (context, index) {
+                          final travel = travelListState[index];
+                          return TravelCard(travel: travel);
+                        },
+                      ),
               ),
             ],
           ),

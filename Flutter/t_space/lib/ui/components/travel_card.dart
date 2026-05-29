@@ -17,7 +17,7 @@ class TravelCard extends StatelessWidget {
             width: 500,
             child: Row(
               children: [
-                  Image.asset (""),
+                  Text ("Aqui sera uma imagem"),
                   Column(
                     children: [
                       Text(travel.title),

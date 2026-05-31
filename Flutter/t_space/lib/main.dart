@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:t_space/ui/screens/home_screen.dart';
+import 'package:t_space/config/app_naviagtion.dart';
+import 'package:t_space/config/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: const HomeScreen(),
+      initialRoute: AppRoutes.splash,
+      routes: AppNavigation.routes,
     );
   }
 }

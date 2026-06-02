@@ -5,15 +5,11 @@ import 'package:t_space/model/travel.dart';
 import 'package:t_space/ui/screens/company_screen.dart';
 import 'package:t_space/ui/screens/home_screen.dart';
 import 'package:t_space/ui/screens/splash_screen.dart';
-import 'package:t_space/ui/screens/travel_screnn.dart';
+import 'package:t_space/ui/screens/travel_scren.dart';
 
 class AppNavigation {
   static Map<String, WidgetBuilder> get routes => {
-    AppRoutes.splash: (context) => SplashScreen(
-      onNavigateToLogin: () {
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
-      },
-    ),
+    AppRoutes.splash: (context) => const SplashScreen(),
     AppRoutes.home: (context) => const HomeScreen(),
     AppRoutes.company: (context) {
       final company = ModalRoute.of(context)?.settings.arguments as Company?;

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
-  const Header({super.key});
+  final bool showBackButton;
+
+  const Header({super.key, this.showBackButton = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: showBackButton,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

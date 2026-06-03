@@ -15,6 +15,30 @@ import java.time.LocalDate;
 @EqualsAndHashCode(of = "id")
 public class ViagemPassageiro {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "data_partida", nullable = false)
+    private LocalDate dataPartida;
+
+    @Column(name = "preco", nullable = false)
+    private Double preco;
+
+    @Column(name = "duracao_dias", nullable = false)
+    private Integer duracaoDias;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_viagem", nullable = false, length = 30)
+    private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "viagem_id", nullable = false)
+    private Viagem viagem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "passageiro_id", nullable = false)
+    private Passageiro passageiro;
 
     public ViagemPassageiro(ViagemPassageiroDTO dto){
         this.id = dto.getId();
@@ -22,28 +46,14 @@ public class ViagemPassageiro {
         this.preco = dto.getPreco();
         this.duracaoDias = dto.getDuracaoDias();
         this.status = dto.getStatus();
+
+        if (dto.getViagemId() != null) {
+            this.viagem = new Viagem();
+            this.viagem.setId(dto.getViagemId());
+        }
+        if (dto.getPassageiroId() != null) {
+            this.passageiro = new Passageiro();
+            this.passageiro.setId(dto.getPassageiroId());
+        }
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private LocalDate dataPartida;
-
-    private Double preco;
-
-    private Integer duracaoDias;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status_viagem")
-    private Status status;
-
-
-    @ManyToOne
-    @JoinColumn(name = "viagem_id")
-    private Viagem viagem;
-
-    @ManyToOne
-    @JoinColumn(name = "passageiro_id")
-    private Passageiro passageiro;
 }

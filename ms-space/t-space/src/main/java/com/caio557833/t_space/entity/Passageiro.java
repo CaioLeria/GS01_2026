@@ -16,6 +16,28 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class Passageiro {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "nome", nullable = false, length = 120)
+    private String nome;
+
+    @Column(name = "data_nascimento", nullable = false)
+    private LocalDate dataNascimento;
+
+    @Column(name = "passaporte", nullable = false, length = 20)
+    private String passaporte;
+
+    @Column(name = "data_cadastro", nullable = false)
+    private LocalDate dataCadastro;
+
+    @Column(name = "nacionalidade", nullable = false, length = 60)
+    private String nacionalidade;
+
+    @OneToMany(mappedBy = "passageiro")
+    private List<ViagemPassageiro> viagensPassageiros;
+
     public Passageiro(PassageiroDTO dto){
         this.id = dto.getId();
         this.nome = dto.getNome();
@@ -24,21 +46,4 @@ public class Passageiro {
         this.dataCadastro = dto.getDataCadastro();
         this.nacionalidade = dto.getNacionalidade();
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nome;
-
-    private LocalDate dataNascimento;
-
-    private String passaporte;
-
-    private LocalDate dataCadastro;
-
-    private String nacionalidade;
-
-    @OneToMany(mappedBy = "passageiro")
-    private List<ViagemPassageiro> viagensPassageiros;
 }

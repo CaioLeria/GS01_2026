@@ -19,12 +19,16 @@ public class Viagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "destino", nullable = false, length = 100)
     private String destino;
 
+    @Column(name = "empresa", nullable = false, length = 100)
     private String empresa;
 
+    @Column(name = "descricao", nullable = false, length = 500)
     private String descricao;
 
+    @Column(name = "capacidade_maxima", nullable = false)
     private Integer capacidadeMaxima;
 
     @OneToMany(mappedBy = "viagem")

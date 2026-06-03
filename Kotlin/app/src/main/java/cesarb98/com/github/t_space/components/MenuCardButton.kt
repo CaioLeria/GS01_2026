@@ -1,11 +1,12 @@
 package cesarb98.com.github.t_space.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.RocketLaunch
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,64 +21,112 @@ import androidx.compose.ui.unit.sp
 fun MenuCardButton(
     titulo: String,
     subtitulo: String,
-    icone: ImageVector = Icons.Default.Build,
-    corItem: Color = Color(0xFFBD00FF),
-    textoBotaoPrincipal: String = "Detalhes",
+    corAzulClaro: Color,
+    textoBotaoPrincipal: String,
     onCliquePrincipal: () -> Unit,
+    modifier: Modifier = Modifier,
+    icone: ImageVector = Icons.Default.RocketLaunch,
     textoBotaoSecundario: String? = null,
-    onCliqueSecundario: (() -> Unit)? = null
+    onCliqueSecundario: () -> Unit = {}
 ) {
-    Card(
-        modifier = Modifier
+    Box(
+        modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.05f)),
-        border = androidx.compose.foundation.BorderStroke(0.5.dp, Color.White.copy(alpha = 0.1f))
+            .padding(bottom = 16.dp)
+            .background(Color.White.copy(alpha = 0.65f), RoundedCornerShape(16.dp))
+            .border(1.dp, Color.White.copy(alpha = 0.15f), RoundedCornerShape(16.dp))
+            .padding(16.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier
-                        .size(44.dp)
-                        .background(corItem.copy(alpha = 0.15f), CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(imageVector = icone, contentDescription = null, tint = corItem, modifier = Modifier.size(24.dp))
-                }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .background(corAzulClaro.copy(alpha = 0.15f), CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icone,
+                    contentDescription = null,
+                    tint = Color.Black,
+                    modifier = Modifier.size(28.dp)
+                )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column {
-                    Text(text = titulo, color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                    Text(text = subtitulo, color = Color.LightGray, fontSize = 13.sp)
-                }
+                Icon(
+                    imageVector = icone,
+                    contentDescription = null,
+                    tint = corAzulClaro,
+                    modifier = Modifier.size(22.dp)
+                )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(16.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                if (textoBotaoSecundario != null && onCliqueSecundario != null) {
-                    OutlinedButton(
-                        onClick = onCliqueSecundario,
-                        modifier = Modifier.padding(end = 8.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, corItem.copy(alpha = 0.5f)),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
-                    ) {
-                        Text(text = textoBotaoSecundario, fontSize = 12.sp)
-                    }
-                }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = titulo,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
 
-                Button(
-                    onClick = onCliquePrincipal,
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = corItem)
+                Spacer(modifier = Modifier.height(2.dp))
+
+                Text(
+                    text = subtitulo,
+                    fontSize = 15.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(text = textoBotaoPrincipal, fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                    if (textoBotaoSecundario != null) {
+                        OutlinedButton(
+                            onClick = onCliqueSecundario,
+                            shape = RoundedCornerShape(8.dp),
+                            border = androidx.compose.foundation.BorderStroke(1.2.dp, Color.Black),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                containerColor = Color.Transparent,
+                                contentColor = Color.Black
+                            ),
+                            contentPadding = PaddingValues(horizontal = 12.dp),
+                            modifier = Modifier.height(36.dp)
+                        ) {
+                            Text(
+                                text = textoBotaoSecundario,
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+
+                    Button(
+                        onClick = onCliquePrincipal,
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = corAzulClaro.copy(alpha = 0.65f),
+                            contentColor = Color.White
+                        ),
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        modifier = Modifier.height(36.dp)
+                    ) {
+                        Text(
+                            text = textoBotaoPrincipal,
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.5.sp
+                        )
+                    }
                 }
             }
         }

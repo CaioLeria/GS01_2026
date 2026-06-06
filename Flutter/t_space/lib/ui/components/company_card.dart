@@ -10,25 +10,39 @@ class CompanyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClick != null ? ( ) => 
-      onClick! (company) : null,
+      onTap: onClick != null ? () => onClick!(company) : null,
 
-      child: SizedBox(
-        width: 100,
-        height: 100,
-        child: Column(
-          children: [
-            Card(
-              shape: const CircleBorder(),
-              elevation: 4,
-              child: Center(
-                child: Padding (padding: EdgeInsets.all(8), child: SvgPicture.asset('assets/icons/rocket_launch.svg', width: 24, height: 24, colorFilter: const ColorFilter.mode(Colors.deepPurple, BlendMode.srcIn)),),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: SizedBox(
+          width: 100,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Card(
+                shape: const CircleBorder(),
+                elevation: 4,
+                clipBehavior: Clip.antiAlias,
+                child: SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: SvgPicture.asset(company.image, fit: BoxFit.contain),
+                  ),
+                ),
               ),
-            ),
-            Text(company.name)
-          ],
+              const SizedBox(height: 8),
+              Text(
+                company.name,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 14, color: Colors.white),
+              ),
+            ],
+          ),
         ),
-        
       ),
     );
   }

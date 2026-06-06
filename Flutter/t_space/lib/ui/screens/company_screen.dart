@@ -14,36 +14,49 @@ class CompanyScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                company.image,
-                width: 200,
-                height: 200,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minWidth: 800,
+              maxWidth: 800,
+            ),
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
-              const SizedBox(height: 24),
-              Text(
-                company.name,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(company.image, width: 200, height: 200),
+                  const SizedBox(height: 24),
+                  Text(
+                    company.name,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Owner: ${company.owner}',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Rating: ${company.rating}',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              Text(
-                'Owner: ${company.owner}',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 8),      
-              Text(
-                'Rating: ${company.rating}',
-                style: const TextStyle(fontSize: 18),
-              ),
-            ],
+            ),
           ),
         ),
+      
+      ),
       ),
     );
   }

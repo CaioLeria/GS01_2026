@@ -13,23 +13,51 @@ class TravelScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Travel Details',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          child: Card(
+            color: Colors.white.withOpacity(0.60),
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    travel.title,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      travel.image,
+                      width: 400,
+                      height: 380,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Travel Details',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  Text('Destination: ${travel.destination}'),
+                  const SizedBox(height: 8),
+                  Text('Duration: ${travel.duration}'),
+                  const SizedBox(height: 8),
+                  Text('Price: \$${travel.price.toStringAsFixed(2)}'),
+                  const SizedBox(height: 8),
+                  Text('Company: ${travel.company.name}'),
+                ],
               ),
-               SizedBox(height: 16),
-              Text('Destination: ${travel.destination}'),
-               SizedBox(height: 8),
-              Text('Duration: ${travel.duration} days'),
-               SizedBox(height: 8),
-              Text('Price: \$${travel.price.toStringAsFixed(2)}'),
-              SizedBox(height: 8),
-              Text('Company: ${travel.company.name}'),
-            ],
+            ),
           ),
         ),
       ),

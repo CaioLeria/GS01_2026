@@ -7,6 +7,7 @@ const luaExpress = Travel(
   destination: 'Lua',
   duration: '7 dias',
   company: spacex,
+  image: 'assets/images/lua.jpg',
 );
 
 const orbitaTerrestre = Travel(
@@ -15,6 +16,7 @@ const orbitaTerrestre = Travel(
   destination: 'Órbita Baixa',
   duration: '3 dias',
   company: blueOrigin,
+  image: 'assets/images/orbital.jpg',
 );
 
 const expedicaoMarte = Travel(
@@ -23,6 +25,7 @@ const expedicaoMarte = Travel(
   destination: 'Marte',
   duration: '180 dias',
   company: spacex,
+  image: 'assets/images/marte.jpg',
 );
 
 const missaoISS = Travel(
@@ -31,6 +34,7 @@ const missaoISS = Travel(
   destination: 'Estação ISS',
   duration: '14 dias',
   company: nasa,
+  image: 'assets/images/iss.jpg',
 );
 
 const turismoSuborbital = Travel(
@@ -39,6 +43,7 @@ const turismoSuborbital = Travel(
   destination: 'Espaço Suborbital',
   duration: '2 horas',
   company: virginGalactic,
+  image: 'assets/images/suborbital.png',
 );
 
 List<Travel> getAllTravels() {

@@ -19,11 +19,13 @@ class _FilterDropdownState extends State<FilterDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       width: 200,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(8),
+         color: Colors.white.withOpacity(0.60),
       ),
       child: DropdownButton<CompanyFilter>(
         value: selectedFilter,

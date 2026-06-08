@@ -1,4 +1,4 @@
-package cesarb98.com.github.t_space.screens
+package cesarb98.com.github.t_space.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,12 +16,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cesarb98.com.github.t_space.ui.theme.AzulGeada
+import cesarb98.com.github.t_space.ui.theme.AzulNoturnoFundo
+import cesarb98.com.github.t_space.ui.theme.AzulSideralMedio
+import cesarb98.com.github.t_space.ui.theme.BrancoNeblina
 
 @Composable
 fun MenuCardButton(
     titulo: String,
     subtitulo: String,
-    corAzulClaro: Color,
     textoBotaoPrincipal: String,
     onCliquePrincipal: () -> Unit,
     modifier: Modifier = Modifier,
@@ -33,11 +36,10 @@ fun MenuCardButton(
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp)
-            .background(Color.White.copy(alpha = 0.65f), RoundedCornerShape(16.dp))
-            .border(1.dp, Color.White.copy(alpha = 0.15f), RoundedCornerShape(16.dp))
+            .background(AzulNoturnoFundo.copy(alpha = 0.85f), RoundedCornerShape(16.dp))
+            .border(1.dp, AzulSideralMedio.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
     ) {
 
-        // Header: ícone + título + subtítulo
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,20 +49,15 @@ fun MenuCardButton(
             Box(
                 modifier = Modifier
                     .size(44.dp)
-                    .background(corAzulClaro.copy(alpha = 0.15f), CircleShape),
+                    .background(AzulSideralMedio.copy(alpha = 0.35f), CircleShape)
+                    .border(1.dp, AzulGeada.copy(alpha = 0.4f), CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = icone,
                     contentDescription = null,
-                    tint = Color.Black,
-                    modifier = Modifier.size(28.dp)
-                )
-                Icon(
-                    imageVector = icone,
-                    contentDescription = null,
-                    tint = corAzulClaro,
-                    modifier = Modifier.size(22.dp)
+                    tint = AzulGeada,
+                    modifier = Modifier.size(24.dp)
                 )
             }
 
@@ -71,25 +68,23 @@ fun MenuCardButton(
                     text = titulo,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = BrancoNeblina
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = subtitulo,
-                    fontSize = 15.sp,
-                    color = Color.Black,
+                    fontSize = 13.sp,
+                    color = AzulGeada,
                     fontWeight = FontWeight.Medium
                 )
             }
         }
 
-        // Divider
         HorizontalDivider(
-            color = Color.Black.copy(alpha = 0.08f),
+            color = AzulSideralMedio.copy(alpha = 0.4f),
             thickness = 1.dp
         )
 
-        // Footer: botões
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -101,17 +96,17 @@ fun MenuCardButton(
                 OutlinedButton(
                     onClick = onCliqueSecundario,
                     shape = RoundedCornerShape(8.dp),
-                    border = androidx.compose.foundation.BorderStroke(1.2.dp, Color.Black),
+                    border = androidx.compose.foundation.BorderStroke(1.2.dp, AzulGeada),
                     colors = ButtonDefaults.outlinedButtonColors(
                         containerColor = Color.Transparent,
-                        contentColor = Color.Black
+                        contentColor = BrancoNeblina
                     ),
                     contentPadding = PaddingValues(horizontal = 12.dp),
                     modifier = Modifier.height(36.dp)
                 ) {
                     Text(
                         text = textoBotaoSecundario,
-                        fontSize = 15.sp,
+                        fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.5.sp
                     )
@@ -123,15 +118,15 @@ fun MenuCardButton(
                 onClick = onCliquePrincipal,
                 shape = RoundedCornerShape(8.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = corAzulClaro.copy(alpha = 0.65f),
-                    contentColor = Color.White
+                    containerColor = AzulSideralMedio,
+                    contentColor = BrancoNeblina
                 ),
                 contentPadding = PaddingValues(horizontal = 16.dp),
                 modifier = Modifier.height(36.dp)
             ) {
                 Text(
                     text = textoBotaoPrincipal,
-                    fontSize = 15.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.5.sp
                 )

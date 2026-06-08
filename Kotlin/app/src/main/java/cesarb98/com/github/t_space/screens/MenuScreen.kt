@@ -11,24 +11,25 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import cesarb98.com.github.t_space.components.MenuCardButton
 import cesarb98.com.github.t_space.model.Empresa
 import cesarb98.com.github.t_space.model.EmpresaViagemRepository
 import cesarb98.com.github.t_space.navigation.Routes
+import cesarb98.com.github.t_space.ui.theme.AzulGeada
+import cesarb98.com.github.t_space.ui.theme.AzulNoturnoFundo
+import cesarb98.com.github.t_space.ui.theme.AzulSideralMedio
+import cesarb98.com.github.t_space.ui.theme.BrancoNeblina
 
 @Composable
 fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
-    val corAzulClaro = Color(0xFF00BFFF)
-
     val empresas = EmpresaViagemRepository.listaDeEmpresas
     var empresaSelecionada by remember { mutableStateOf<Empresa?>(null) }
     var dropdownExpandido by remember { mutableStateOf(false) }
 
-    // Lista unificada: filtra por empresa ou exibe todas
     val viagensExibidas = remember(empresaSelecionada) {
         empresaSelecionada?.viagensDisponiveis
             ?: empresas.flatMap { it.viagensDisponiveis }
@@ -46,7 +47,7 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
                 text = "T-SPACE",
                 fontSize = 38.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
+                color = BrancoNeblina,
                 modifier = Modifier.padding(vertical = 24.dp)
             )
 
@@ -59,11 +60,11 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
                         .height(56.dp),
                     border = androidx.compose.foundation.BorderStroke(
                         1.2.dp,
-                        if (dropdownExpandido) corAzulClaro else Color.White.copy(alpha = 0.4f)
+                        if (dropdownExpandido) AzulGeada else AzulSideralMedio.copy(alpha = 0.7f)
                     ),
                     colors = ButtonDefaults.outlinedButtonColors(
-                        containerColor = Color.White.copy(alpha = 0.65f),
-                        contentColor = Color.Black
+                        containerColor = AzulNoturnoFundo.copy(alpha = 0.85f),
+                        contentColor = BrancoNeblina
                     ),
                     contentPadding = PaddingValues(horizontal = 16.dp)
                 ) {
@@ -74,14 +75,14 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
                     ) {
                         Text(
                             text = empresaSelecionada?.nome ?: "Todas as Empresas",
-                            fontSize = 20.sp,
-                            color = Color.Black,
+                            fontSize = 18.sp,
+                            color = BrancoNeblina,
                             fontWeight = FontWeight.Medium
                         )
                         Icon(
                             imageVector = Icons.Default.ArrowDropDown,
                             contentDescription = null,
-                            tint = Color.Black
+                            tint = AzulGeada
                         )
                     }
                 }
@@ -115,9 +116,9 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
             Text(
                 text = if (empresaSelecionada == null) "PRÓXIMOS LANÇAMENTOS"
                 else "ROTAS DISPONÍVEIS: ${empresaSelecionada?.nome?.uppercase()}",
-                fontSize = 30.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = Color.White.copy(alpha = 0.7f),
+                color = AzulGeada,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp)
@@ -130,7 +131,6 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
                     titulo = viagem.destino,
                     subtitulo = "Operado por: ${empresa?.nome ?: ""} | ${viagem.duracao}",
                     icone = Icons.Default.RocketLaunch,
-                    corAzulClaro = corAzulClaro,
                     textoBotaoPrincipal = "Ver Viagem",
                     onCliquePrincipal = {
                         navController.navigate(Routes.detalhesComId(viagem.id))

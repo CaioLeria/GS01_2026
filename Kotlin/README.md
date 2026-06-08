@@ -2,7 +2,6 @@
 
 > Protótipo funcional Android desenvolvido em Kotlin + Jetpack Compose  
 > Global Solution 2026 — Tema: Indústria Espacial  
-> Aluno: Cesar B. | RA: cesarb98
 
 ---
 
@@ -47,38 +46,22 @@ t_space/
 
 ## 📲 Fluxo de Telas
 
-```
-┌─────────────────┐
-│   StartScreen   │  ← Tela inicial com identidade visual
-│   "T-SPACE"     │
-│   [COMEÇAR]     │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   MenuScreen    │  ← Lista todas as viagens disponíveis
-│  Filtro por     │     Filtro por empresa via dropdown
-│  empresa ▼      │
-│  [Card Viagem]  │
-└────┬───────┬────┘
-     │       │
-     │       ▼
-     │  ┌─────────────────┐
-     │  │  EmpresaScreen  │  ← Detalhes da empresa espacial
-     │  │  Nome, fundação │     Lista de rotas da empresa
-     │  │  Descrição      │
-     │  │  [Rotas]        │
-     │  └────────┬────────┘
-     │           │
-     ▼           ▼
-┌─────────────────┐
-│  ViagemScreen   │  ← Detalhes completos da missão
-│  Destino        │     Duração, preço, descrição
-│  Descrição      │     Botão "Reservar Assento"
-│  Especificações │
-│  [RESERVAR]     │
-└─────────────────┘
-```
+
+StartScreen - Tela inicial com identidade visual
+<img width="1080" height="2400" alt="Print da Tela inicial" src="https://github.com/user-attachments/assets/0450ed09-43a5-458d-8b85-1b9bd1b375ef" />
+
+
+MenuScreen - Lista todas as viagens disponíveis / Filtro por empresa via dropdown
+<img width="1080" height="2400" alt="Print do Menu" src="https://github.com/user-attachments/assets/b998e324-68b2-4569-9198-b8d076db8ae4" />
+
+
+EmpresaScreen - Detalhes da empresa espacial / Lista de rotas da empresa
+<img width="1080" height="2400" alt="Print da tela da Empresa" src="https://github.com/user-attachments/assets/c06e8eb5-ddb4-469b-8de2-f0c0bfe8f2a5" />
+
+
+ViagemScreen - Detalhes completos da missão com duração, preço, descrição / Botão "Reservar Assento"
+<img width="1080" height="2400" alt="Print da tela de Viagem" src="https://github.com/user-attachments/assets/2dfc2f24-809b-47d5-bb06-b7c5cf10766e" />
+
 
 ---
 
@@ -149,3 +132,6 @@ Dados mockados no `EmpresaViagemRepository` com **3 empresas** e **9 viagens**:
 ## 🌌 Contexto — Indústria Espacial
 
 O T-Space representa a convergência entre tecnologia mobile e a nova economia espacial. Com empresas como SpaceX, Blue Origin e Virgin Galactic democratizando o acesso ao espaço, aplicações como esta simulam como seria a experiência do usuário num futuro próximo de turismo orbital acessível — conectando a logística espacial ao cotidiano das pessoas através de interfaces intuitivas e modernas.
+
+
+

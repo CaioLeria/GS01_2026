@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cesarb98.com.github.t_space.model.Empresa
+import cesarb98.com.github.t_space.navigation.Routes
 
 @Composable
 fun EmpresaScreen(empresa: Empresa, navController: NavController) {
@@ -86,7 +87,7 @@ fun EmpresaScreen(empresa: Empresa, navController: NavController) {
                     corAzulClaro = corAzulClaro,
                     textoBotaoPrincipal = "Ver Roteiro",
                     onCliquePrincipal = {
-                        navController.navigate("detalhes/${viagem.id}")
+                        navController.navigate(Routes.detalhesComId(viagem.id))
                     },
                     textoBotaoSecundario = null
                 )

@@ -29,16 +29,19 @@ fun MenuCardButton(
     textoBotaoSecundario: String? = null,
     onCliqueSecundario: () -> Unit = {}
 ) {
-    Box(
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp)
             .background(Color.White.copy(alpha = 0.65f), RoundedCornerShape(16.dp))
             .border(1.dp, Color.White.copy(alpha = 0.15f), RoundedCornerShape(16.dp))
-            .padding(16.dp)
     ) {
+
+        // Header: ícone + título + subtítulo
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -53,7 +56,6 @@ fun MenuCardButton(
                     tint = Color.Black,
                     modifier = Modifier.size(28.dp)
                 )
-
                 Icon(
                     imageVector = icone,
                     contentDescription = null,
@@ -64,70 +66,75 @@ fun MenuCardButton(
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Column(modifier = Modifier.weight(1f)) {
+            Column {
                 Text(
                     text = titulo,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
-
                 Spacer(modifier = Modifier.height(2.dp))
-
                 Text(
                     text = subtitulo,
                     fontSize = 15.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Medium
                 )
+            }
+        }
 
-                Spacer(modifier = Modifier.height(14.dp))
+        // Divider
+        HorizontalDivider(
+            color = Color.Black.copy(alpha = 0.08f),
+            thickness = 1.dp
+        )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
+        // Footer: botões
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (textoBotaoSecundario != null) {
+                OutlinedButton(
+                    onClick = onCliqueSecundario,
+                    shape = RoundedCornerShape(8.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.2.dp, Color.Black),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Black
+                    ),
+                    contentPadding = PaddingValues(horizontal = 12.dp),
+                    modifier = Modifier.height(36.dp)
                 ) {
-                    if (textoBotaoSecundario != null) {
-                        OutlinedButton(
-                            onClick = onCliqueSecundario,
-                            shape = RoundedCornerShape(8.dp),
-                            border = androidx.compose.foundation.BorderStroke(1.2.dp, Color.Black),
-                            colors = ButtonDefaults.outlinedButtonColors(
-                                containerColor = Color.Transparent,
-                                contentColor = Color.Black
-                            ),
-                            contentPadding = PaddingValues(horizontal = 12.dp),
-                            modifier = Modifier.height(36.dp)
-                        ) {
-                            Text(
-                                text = textoBotaoSecundario,
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Bold,
-                                letterSpacing = 0.5.sp
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(8.dp))
-                    }
-
-                    Button(
-                        onClick = onCliquePrincipal,
-                        shape = RoundedCornerShape(8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = corAzulClaro.copy(alpha = 0.65f),
-                            contentColor = Color.White
-                        ),
-                        contentPadding = PaddingValues(horizontal = 16.dp),
-                        modifier = Modifier.height(36.dp)
-                    ) {
-                        Text(
-                            text = textoBotaoPrincipal,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 0.5.sp
-                        )
-                    }
+                    Text(
+                        text = textoBotaoSecundario,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.5.sp
+                    )
                 }
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
+            Button(
+                onClick = onCliquePrincipal,
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = corAzulClaro.copy(alpha = 0.65f),
+                    contentColor = Color.White
+                ),
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                modifier = Modifier.height(36.dp)
+            ) {
+                Text(
+                    text = textoBotaoPrincipal,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.5.sp
+                )
             }
         }
     }

@@ -16,8 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import cesarb98.com.github.t_space.model.EmpresaViagemRepository
 import cesarb98.com.github.t_space.model.Empresa
+import cesarb98.com.github.t_space.model.EmpresaViagemRepository
+import cesarb98.com.github.t_space.navigation.Routes
 
 @Composable
 fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
@@ -27,9 +28,13 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
     var empresaSelecionada by remember { mutableStateOf<Empresa?>(null) }
     var dropdownExpandido by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
+    // Lista unificada: filtra por empresa ou exibe todas
+    val viagensExibidas = remember(empresaSelecionada) {
+        empresaSelecionada?.viagensDisponiveis
+            ?: empresas.flatMap { it.viagensDisponiveis }
+    }
+
+    Box(modifier = modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -39,7 +44,7 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
         ) {
             Text(
                 text = "T-SPACE",
-                fontSize = 50.sp,
+                fontSize = 38.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
                 modifier = Modifier.padding(vertical = 24.dp)
@@ -48,8 +53,10 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(
                     onClick = { dropdownExpandido = true },
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.fillMaxWidth().height(56.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
                     border = androidx.compose.foundation.BorderStroke(
                         1.2.dp,
                         if (dropdownExpandido) corAzulClaro else Color.White.copy(alpha = 0.4f)
@@ -65,14 +72,12 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column {
-                            Text(
-                                text = empresaSelecionada?.nome ?: "Todas as Empresas",
-                                fontSize = 20.sp,
-                                color = Color.Black,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
+                        Text(
+                            text = empresaSelecionada?.nome ?: "Todas as Empresas",
+                            fontSize = 20.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Medium
+                        )
                         Icon(
                             imageVector = Icons.Default.ArrowDropDown,
                             contentDescription = null,
@@ -93,7 +98,6 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
                             dropdownExpandido = false
                         }
                     )
-
                     empresas.forEach { empresa ->
                         DropdownMenuItem(
                             text = { Text(empresa.nome) },
@@ -109,43 +113,33 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = if (empresaSelecionada == null) "PRÓXIMOS LANÇAMENTOS" else "ROTAS DISPONÍVEIS: ${empresaSelecionada?.nome?.uppercase()}",
-                fontSize = 24.sp,
+                text = if (empresaSelecionada == null) "PRÓXIMOS LANÇAMENTOS"
+                else "ROTAS DISPONÍVEIS: ${empresaSelecionada?.nome?.uppercase()}",
+                fontSize = 30.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
+                color = Color.White.copy(alpha = 0.7f),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp)
             )
 
-            if (empresaSelecionada == null) {
-                empresas.forEach { empresa ->
-                    empresa.viagensDisponiveis.forEach { viagem ->
-                        MenuCardButton(
-                            titulo = viagem.destino,
-                            subtitulo = "Operado por: ${empresa.nome} | ${viagem.duracao}",
-                            icone = Icons.Default.RocketLaunch,
-                            corAzulClaro = corAzulClaro,
-                            textoBotaoPrincipal = "Ver Viagem",
-                            onCliquePrincipal = { navController.navigate("detalhes/${viagem.id}") },
-                            textoBotaoSecundario = "Ver Empresa",
-                            onCliqueSecundario = { navController.navigate("empresa/${empresa.id}") }
-                        )
+            viagensExibidas.forEach { viagem ->
+                val empresa = EmpresaViagemRepository.buscarEmpresaPorViagemId(viagem.id)
+
+                MenuCardButton(
+                    titulo = viagem.destino,
+                    subtitulo = "Operado por: ${empresa?.nome ?: ""} | ${viagem.duracao}",
+                    icone = Icons.Default.RocketLaunch,
+                    corAzulClaro = corAzulClaro,
+                    textoBotaoPrincipal = "Ver Viagem",
+                    onCliquePrincipal = {
+                        navController.navigate(Routes.detalhesComId(viagem.id))
+                    },
+                    textoBotaoSecundario = "Ver Empresa",
+                    onCliqueSecundario = {
+                        empresa?.let { navController.navigate(Routes.empresaComId(it.id)) }
                     }
-                }
-            } else {
-                empresaSelecionada?.viagensDisponiveis?.forEach { viagem ->
-                    MenuCardButton(
-                        titulo = viagem.destino,
-                        subtitulo = "Operado por: ${empresaSelecionada?.nome} | ${viagem.duracao}",
-                        icone = Icons.Default.RocketLaunch,
-                        corAzulClaro = corAzulClaro,
-                        textoBotaoPrincipal = "Ver Viagem",
-                        onCliquePrincipal = { navController.navigate("detalhes/${viagem.id}") },
-                        textoBotaoSecundario = "Ver Empresa",
-                        onCliqueSecundario = { navController.navigate("empresa/${empresaSelecionada?.id}") }
-                    )
-                }
+                )
             }
         }
     }

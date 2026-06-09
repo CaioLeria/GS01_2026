@@ -10,19 +10,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import cesarb98.com.github.t_space.components.MenuCardButton
 import cesarb98.com.github.t_space.model.Empresa
+import cesarb98.com.github.t_space.navigation.Routes
+import cesarb98.com.github.t_space.ui.theme.AzulGeada
+import cesarb98.com.github.t_space.ui.theme.AzulNoturnoFundo
+import cesarb98.com.github.t_space.ui.theme.AzulSideralMedio
+import cesarb98.com.github.t_space.ui.theme.BrancoNeblina
 
 @Composable
 fun EmpresaScreen(empresa: Empresa, navController: NavController) {
-    val corAzulClaro = Color(0xFF00BFFF)
-    val azulClaroContorno = Color(0xFF87CEEB)
-    val vidroFumeClaro = Color.White.copy(alpha = 0.65f)
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,14 +39,14 @@ fun EmpresaScreen(empresa: Empresa, navController: NavController) {
                 text = empresa.nome.uppercase(),
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Black,
-                color = corAzulClaro,
+                color = AzulGeada,
                 modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
             )
 
             Text(
                 text = "Fundada em: ${empresa.fundacao}",
                 fontSize = 14.sp,
-                color = Color.White.copy(alpha = 0.6f),
+                color = BrancoNeblina.copy(alpha = 0.6f),
                 fontWeight = FontWeight.Medium
             )
 
@@ -54,13 +55,13 @@ fun EmpresaScreen(empresa: Empresa, navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(vidroFumeClaro, RoundedCornerShape(18.dp))
-                    .border(1.2.dp, azulClaroContorno.copy(alpha = 0.4f), RoundedCornerShape(18.dp))
+                    .background(AzulNoturnoFundo.copy(alpha = 0.85f), RoundedCornerShape(18.dp))
+                    .border(1.2.dp, AzulSideralMedio.copy(alpha = 0.6f), RoundedCornerShape(18.dp))
                     .padding(20.dp)
             ) {
                 Text(
                     text = empresa.descricao,
-                    color = Color.Black,
+                    color = BrancoNeblina,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     lineHeight = 24.sp
@@ -71,9 +72,9 @@ fun EmpresaScreen(empresa: Empresa, navController: NavController) {
 
             Text(
                 text = "ROTAS DESTA COMPANHIA",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White.copy(alpha = 0.7f),
+                fontSize = 30.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = AzulGeada,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp)
@@ -83,10 +84,9 @@ fun EmpresaScreen(empresa: Empresa, navController: NavController) {
                 MenuCardButton(
                     titulo = viagem.destino,
                     subtitulo = "Duração da jornada: ${viagem.duracao}",
-                    corAzulClaro = corAzulClaro,
                     textoBotaoPrincipal = "Ver Roteiro",
                     onCliquePrincipal = {
-                        navController.navigate("detalhes/${viagem.id}")
+                        navController.navigate(Routes.detalhesComId(viagem.id))
                     },
                     textoBotaoSecundario = null
                 )
@@ -97,9 +97,9 @@ fun EmpresaScreen(empresa: Empresa, navController: NavController) {
             OutlinedButton(
                 onClick = { navController.popBackStack() },
                 shape = RoundedCornerShape(10.dp),
-                border = androidx.compose.foundation.BorderStroke(1.5.dp, corAzulClaro),
+                border = androidx.compose.foundation.BorderStroke(1.5.dp, AzulGeada),
                 colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = corAzulClaro.copy(alpha = 0.65f)
+                    contentColor = AzulGeada
                 ),
                 modifier = Modifier
                     .fillMaxWidth()

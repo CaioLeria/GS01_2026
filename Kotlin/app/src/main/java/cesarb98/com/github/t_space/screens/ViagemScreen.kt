@@ -3,16 +3,7 @@ package cesarb98.com.github.t_space.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,28 +12,27 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.MailOutline
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import cesarb98.com.github.t_space.model.EmpresaViagemRepository
 import cesarb98.com.github.t_space.model.Viagem
+import cesarb98.com.github.t_space.ui.theme.AzulGeada
+import cesarb98.com.github.t_space.ui.theme.AzulNoturnoFundo
+import cesarb98.com.github.t_space.ui.theme.AzulSideralMedio
+import cesarb98.com.github.t_space.ui.theme.BrancoNeblina
 
 @Composable
 fun ViagemScreen(viagem: Viagem, navController: NavController) {
-    val corAzulClaro = Color(0xFF00BFFF)
-    val azulClaroContorno = Color(0xFF87CEEB)
-    val vidroFumeClaro = Color.White.copy(alpha = 0.65f)
+    val nomeEmpresa = EmpresaViagemRepository
+        .buscarEmpresaPorViagemId(viagem.id)?.nome ?: ""
 
     Box(
         modifier = Modifier
@@ -55,12 +45,11 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Text(
-                text = viagem.empresa.uppercase(),
-                fontSize = 14.sp,
+                text = nomeEmpresa.uppercase(),
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = corAzulClaro,
+                color = AzulGeada,
                 modifier = Modifier.padding(top = 16.dp)
             )
 
@@ -68,7 +57,7 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
                 text = viagem.destino,
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Black,
-                color = Color.White,
+                color = BrancoNeblina,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
@@ -77,22 +66,24 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
 
             Text(
                 text = "MANIFESTO DA MISSÃO",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White.copy(alpha = 0.7f),
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                fontSize = 30.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = AzulGeada,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
             )
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(vidroFumeClaro, RoundedCornerShape(18.dp))
-                    .border(1.2.dp, azulClaroContorno.copy(alpha = 0.5f), RoundedCornerShape(18.dp))
+                    .background(AzulNoturnoFundo.copy(alpha = 0.85f), RoundedCornerShape(18.dp))
+                    .border(1.2.dp, AzulSideralMedio.copy(alpha = 0.6f), RoundedCornerShape(18.dp))
                     .padding(20.dp)
             ) {
                 Text(
                     text = viagem.descricao,
-                    color = Color.Black,
+                    color = BrancoNeblina,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     lineHeight = 24.sp
@@ -103,19 +94,18 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
 
             Text(
                 text = "ESPECIFICAÇÕES",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White.copy(alpha = 0.7f),
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                fontSize = 30.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = AzulGeada,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
             )
 
             InfoEspecificacaoRow(
                 rotulo = "Duração Estimada",
                 valor = viagem.duracao,
-                icone = Icons.Default.Info,
-                corAzulClaro = corAzulClaro,
-                vidroFumeClaro = vidroFumeClaro,
-                azulClaroContorno = azulClaroContorno
+                icone = Icons.Default.Info
             )
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -123,17 +113,14 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
             InfoEspecificacaoRow(
                 rotulo = "Custo do Assento",
                 valor = viagem.preco,
-                icone = Icons.Default.LocationOn,
-                corAzulClaro = corAzulClaro,
-                vidroFumeClaro = vidroFumeClaro,
-                azulClaroContorno = azulClaroContorno
+                icone = Icons.Default.LocationOn
             )
 
             Spacer(modifier = Modifier.height(40.dp))
 
             Button(
                 onClick = { },
-                colors = ButtonDefaults.buttonColors(containerColor = corAzulClaro.copy(alpha = 0.65f)),
+                colors = ButtonDefaults.buttonColors(containerColor = AzulSideralMedio),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -142,13 +129,13 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
                 Icon(
                     imageVector = Icons.Default.MailOutline,
                     contentDescription = null,
-                    tint = Color.White,
+                    tint = BrancoNeblina,
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "RESERVAR ASSENTO",
-                    color = Color.White,
+                    color = BrancoNeblina,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
@@ -159,9 +146,9 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
             OutlinedButton(
                 onClick = { navController.popBackStack() },
                 shape = RoundedCornerShape(10.dp),
-                border = BorderStroke(1.5.dp, corAzulClaro),
+                border = BorderStroke(1.5.dp, AzulGeada),
                 colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.White
+                    contentColor = AzulGeada
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -180,16 +167,13 @@ fun ViagemScreen(viagem: Viagem, navController: NavController) {
 fun InfoEspecificacaoRow(
     rotulo: String,
     valor: String,
-    icone: ImageVector,
-    corAzulClaro: Color,
-    vidroFumeClaro: Color,
-    azulClaroContorno: Color
+    icone: ImageVector
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(vidroFumeClaro, RoundedCornerShape(14.dp))
-            .border(1.2.dp, azulClaroContorno.copy(alpha = 0.4f), RoundedCornerShape(14.dp))
+            .background(AzulNoturnoFundo.copy(alpha = 0.85f), RoundedCornerShape(14.dp))
+            .border(1.2.dp, AzulSideralMedio.copy(alpha = 0.5f), RoundedCornerShape(14.dp))
             .padding(16.dp)
     ) {
         Row(
@@ -199,13 +183,14 @@ fun InfoEspecificacaoRow(
             Box(
                 modifier = Modifier
                     .size(38.dp)
-                    .background(corAzulClaro.copy(alpha = 0.15f), CircleShape),
+                    .background(AzulSideralMedio.copy(alpha = 0.35f), CircleShape)
+                    .border(1.dp, AzulGeada.copy(alpha = 0.4f), CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = icone,
                     contentDescription = null,
-                    tint = corAzulClaro,
+                    tint = AzulGeada,
                     modifier = Modifier.size(20.dp)
                 )
             }
@@ -215,13 +200,13 @@ fun InfoEspecificacaoRow(
             Column {
                 Text(
                     text = rotulo,
-                    color = Color.Black.copy(alpha = 0.7f),
+                    color = AzulGeada,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = valor,
-                    color = Color.Black,
+                    color = BrancoNeblina,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.ExtraBold
                 )

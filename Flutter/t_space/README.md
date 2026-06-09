@@ -47,18 +47,6 @@ lib/
     E --> F{tela da compania}
     E --> G{tela fa viagem} 
 
-    <img width="1914" height="941" alt="image" src="https://github.com/user-attachments/assets/3b719ff0-4603-473d-b4bf-e398b99ca405" />
-    <img width="1915" height="946" alt="image" src="https://github.com/user-attachments/assets/1780490e-1121-44ee-b5d0-46a1fb84ec7c" />
-    <img width="1908" height="946" alt="image" src="https://github.com/user-attachments/assets/59ca84e4-f971-4a25-a5c8-f0d99fc7bc9c" />
-    <img width="1892" height="943" alt="image" src="https://github.com/user-attachments/assets/491bad9c-9d4b-4683-8d82-6492b5a69f60" />
-    <img width="1913" height="947" alt="image" src="https://github.com/user-attachments/assets/87e6a62b-de93-4923-8e93-b61ebbf7abc0" />
-    <img width="1912" height="943" alt="image" src="https://github.com/user-attachments/assets/f7b8e853-c15d-43c6-91c8-440ccfd253e0" />
-
-
-
-
-
-
 
 ## 📐 Arquitetura
 
